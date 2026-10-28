@@ -1,0 +1,35 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: bakery
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  config:
+    import: optional:file:.env[.properties]
+  profiles:
+    active: ${DEFAULT_PROFILE:local}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  google:
+    client-id: ${GOOGLE_CLIENT_ID}
+
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+    issuer: bakery
+    access-token-ttl: 15m
+    refresh-token-ttl: 7d
+    cookie-secure: true
+
+
